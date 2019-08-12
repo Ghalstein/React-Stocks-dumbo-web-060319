@@ -15,6 +15,13 @@ class MainContainer extends Component {
     }
   }
 
+  handleSellingAStock = (stock) => {
+    console.log("hitting")
+    if (this.state.bought.includes(stock)) {
+      this.setState({bought: this.state.bought.filter(current => current !== stock)})
+    }
+  }
+
   render() {
     return (
       <div>
@@ -28,7 +35,7 @@ class MainContainer extends Component {
             </div>
             <div className="col-4">
 
-              <PortfolioContainer stocks={this.state.bought}/>
+              <PortfolioContainer handleSellingAStock={this.handleSellingAStock} stocks={this.state.bought}/>
 
             </div>
           </div>
