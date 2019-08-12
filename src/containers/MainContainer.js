@@ -5,6 +5,16 @@ import SearchBar from '../components/SearchBar'
 
 class MainContainer extends Component {
 
+  state = {
+    bought: []
+  }
+
+  handleBuyingAStock = (stock) => {
+    if (!this.state.bought.includes(stock)) {
+      this.setState({bought: [...this.state.bought, stock]})
+    }
+  }
+
   render() {
     return (
       <div>
@@ -13,12 +23,12 @@ class MainContainer extends Component {
           <div className="row">
             <div className="col-8">
 
-              <StockContainer stocks={this.props.stocks}/>
+              <StockContainer handleBuyingAStock={this.handleBuyingAStock} stocks={this.props.stocks}/>
 
             </div>
             <div className="col-4">
 
-              <PortfolioContainer/>
+              <PortfolioContainer stocks={this.state.bought}/>
 
             </div>
           </div>
