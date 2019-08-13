@@ -16,7 +16,6 @@ class MainContainer extends Component {
   }
 
   handleSellingAStock = (stock) => {
-    console.log("hitting")
     if (this.state.bought.includes(stock)) {
       this.setState({bought: this.state.bought.filter(current => current !== stock)})
     }
@@ -25,7 +24,7 @@ class MainContainer extends Component {
   render() {
     return (
       <div>
-        <SearchBar/>
+        <SearchBar alphaClicked={this.props.alphaClicked} alphabetize={this.props.alphabetize}/>
 
           <div className="row">
             <div className="col-8">

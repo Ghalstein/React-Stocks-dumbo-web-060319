@@ -5,7 +5,12 @@ import MainContainer from './containers/MainContainer'
 class App extends Component {
 
 	state = {
-		stocks: []
+		stocks: [],
+		alphaClicked: false
+	}
+
+	alphabetize = () => {
+		this.setState({alphaClicked: !this.state.alphaClicked})
 	}
 
 	componentDidMount = () => {
@@ -14,12 +19,23 @@ class App extends Component {
 		.then(stocks => this.setState({stocks}));
 	}
 
+	processStocks = () => {
+		let stocks = [...this.state.stocks];
+		if (this.state.alphaClicked) {
+			return stocks.sort((a, b) => (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0)
+		}
+		else {
+			return stocks;
+		}
+	}
+
   render() {
+  	console.log(this.state.alphaClicked)
   	console.log(this.state.stocks)
     return (
       <div>
         <Header/>
-        {this.state.stocks.length > 0 ? <MainContainer stocks={this.state.stocks}/> : null}
+        {this.state.stocks.length > 0 ? <MainContainer alphaClicked={this.state.alphaClicked} stocks={this.processStocks()} alphabetize={this.alphabetize}/> : null}
       </div>
     );
   }
